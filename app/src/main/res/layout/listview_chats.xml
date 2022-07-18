@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_margin="5dp"
         android:background="@drawable/borde">
 
         <ImageView
             android:id="@+id/img"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/kindpng_214439"
             android:layout_centerVertical="true"/>
 
         <TextView
@@ -25,13 +25,19 @@
             android:text="Loren minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo"
             android:layout_marginRight="40dp"/>
 
-        <ImageButton
-            android:id="@+id/audiobtn"
+        <ImageView
+            android:id="@+id/img2"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/audio2"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/lblaudio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="Comodin"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ public class ProcesosBD {
     DBHelper DbObj;
 
     public ProcesosBD(Context context) {
-        DbObj = new DBHelper(context,"Mensaje",null, 1);
+        DbObj = new DBHelper(context,"Conversacion",null, 1);
     }
 
 
@@ -27,9 +27,13 @@ public class ProcesosBD {
 
             if (sql != null) {
                 ContentValues values = new ContentValues();
-                values.put("dato", data.getDatos());
+                values.put("id", data.getId());
+                values.put("lecciones_id", data.getLecciones_id());
+                values.put("persona", data.getPersona());
+                values.put("dialogo", data.getDialogo());
+                values.put("N_audio", data.getNaudio());
 
-                sql.insert("dato", null, values);
+                sql.insert("conversacion", null, values);
                 sql.close();
                 return true;
             }
@@ -38,21 +42,32 @@ public class ProcesosBD {
         return false;
     }
 
-    public List<Datos>ObtenerDatos() {
+    public ArrayList<Datos>ObtenerDatos(int id_leccion) {
 
         try {
             SQLiteDatabase db = DbObj.getReadableDatabase();
             if (db != null){
-                String[] campos = new String[]{"dato"};
+                String[] campos = new String[]{"id", "lecciones_id", "persona", "dialogo", "N_audio"};
 
-                List<Datos> data = new ArrayList<>();
+                ArrayList<Datos> data = new ArrayList<>();
 
-                Cursor cursor = db.query("dato",campos,null,null,null,null,null);
+                //Cursor cursor = db.rawQuery("SELECT * FROM conversacion WHERE lecciones_id = " + id_leccion, null);
+
+                Cursor cursor = db.query("conversacion",campos,null,null,null,null,null);
                 if (cursor.moveToFirst()){
+
                     do {
-                        Datos d = new Datos();
-                        d.setDatos(cursor.getString(0));
-                        data.add(d);
+                        if(cursor.getInt(1)==id_leccion) {
+                            Datos d = new Datos();
+
+                            d.setId(cursor.getInt(0));
+                            d.setLecciones_id(cursor.getInt(1));
+                            d.setPersona(cursor.getInt(2));
+                            d.setDialogo(cursor.getString(3));
+                            d.setNaudio(cursor.getString(4));
+                            data.add(d);
+                        }
+
                     }while(cursor.moveToNext());
                 }
                 db.close();

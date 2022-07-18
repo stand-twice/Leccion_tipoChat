@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    String tableDato = "CREATE TABLE dato (dato TEXT)";
+    String tableDato = "CREATE TABLE conversacion (id INTEGER PRIMARY KEY, lecciones_id INTEGER, persona INTEGER, dialogo TEXT, N_audio TEXT)";
 
     public DBHelper(Context contex, String dbName, SQLiteDatabase.CursorFactory cursor, int dbVersion){
         super(contex,dbName,cursor,dbVersion);

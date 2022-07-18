@@ -13,29 +13,43 @@ import com.example.lecchat.Esquema.Datos;
 
 public class CrearDatos extends AppCompatActivity {
 
-    EditText campo1;
+    EditText id, leccion_id, persona, dialogo, NombreAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_datos);
 
-        campo1 = (EditText) findViewById(R.id.txtDato);
+        InicializarControles();
+    }
+
+    public void InicializarControles() {
+
+        id = (EditText) findViewById(R.id.txtId);
+        leccion_id = (EditText) findViewById(R.id.txtLeccionId);
+        persona = (EditText) findViewById(R.id.txtPersona);
+        dialogo = (EditText) findViewById(R.id.txtDialogo);
+        NombreAudio = (EditText) findViewById(R.id.txtAudio);
     }
 
     public void SaveData(View v) {
 
-        Datos data = new Datos();
-        data.setDatos(campo1.getText().toString());
+        Datos data = new Datos(
+                Integer.parseInt(id.getText().toString()),
+                Integer.parseInt(leccion_id.getText().toString()),
+                Integer.parseInt(persona.getText().toString()),
+                dialogo.getText().toString(),
+                NombreAudio.getText().toString()
+        );
 
         ProcesosBD dbProccess = new ProcesosBD (getApplicationContext());
 
         boolean guardado = dbProccess.SaveDato(data);
         if (guardado){
-            Toast.makeText(getApplicationContext(),"Si se guardo",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Guardado",Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(getApplicationContext(),"No se guardo",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"No guardado",Toast.LENGTH_LONG).show();
         }
     }
 
